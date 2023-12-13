@@ -18,8 +18,7 @@ class AnnaCallResponseWidget extends StatefulWidget {
   }
 }
 
-class _AnnaCallResponseWidgetState
-    extends State<AnnaCallResponseWidget> {
+class _AnnaCallResponseWidgetState extends State<AnnaCallResponseWidget> {
   static const _imageContentType = "image";
   static const _jsonContentType = "json";
   static const _xmlContentType = "xml";
@@ -39,20 +38,17 @@ class _AnnaCallResponseWidgetState
       rows.addAll(_buildHeadersRows());
       rows.addAll(_buildBodyRows());
 
-      return  Container(
-          padding: const EdgeInsets.all(6),
-          child: ListView(children: rows),
-        );
+      return Container(
+        padding: const EdgeInsets.all(6),
+        child: ListView(children: rows),
+      );
     } else {
-      return Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              CircularProgressIndicator(),
-              Text("Awaiting response...")
-            ],
-          ),
-        );
+      return const Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [CircularProgressIndicator(), Text("Awaiting response...")],
+        ),
+      );
     }
   }
 
@@ -96,7 +92,7 @@ class _AnnaCallResponseWidgetState
     final List<Widget> rows = [];
     if (_isImageResponse()) {
       rows.addAll(_buildImageBodyRows());
-    }  else if (_isTextResponse()) {
+    } else if (_isTextResponse()) {
       if (_isLargeResponseBody()) {
         rows.addAll(_buildLargeBodyTextRows());
       } else {
@@ -114,8 +110,8 @@ class _AnnaCallResponseWidgetState
     rows.add(
       Column(
         children: [
-          Row(
-            children: const [
+          const Row(
+            children: [
               Text(
                 "Body: Image",
                 style: TextStyle(fontWeight: FontWeight.bold),
@@ -165,8 +161,7 @@ class _AnnaCallResponseWidgetState
       rows.add(
         ElevatedButton(
           style: ButtonStyle(
-            backgroundColor:
-                MaterialStateProperty.all<Color>(Colors.redAccent),
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.redAccent),
           ),
           onPressed: () {
             setState(() {
@@ -191,7 +186,6 @@ class _AnnaCallResponseWidgetState
     return rows;
   }
 
-
   List<Widget> _buildUnknownBodyRows() {
     final List<Widget> rows = [];
     final headers = _call.response!.headers;
@@ -214,8 +208,7 @@ class _AnnaCallResponseWidgetState
       rows.add(
         ElevatedButton(
           style: ButtonStyle(
-            backgroundColor:
-                MaterialStateProperty.all<Color>(Colors.redAccent),
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.redAccent),
           ),
           onPressed: () {
             setState(() {
@@ -248,7 +241,6 @@ class _AnnaCallResponseWidgetState
         .toLowerCase()
         .contains(_imageContentType);
   }
-
 
   bool _isTextResponse() {
     final String responseContentTypeLowerCase =
@@ -291,7 +283,7 @@ class _AnnaCallResponseWidgetState
     );
   }
 
-   String formatBytes(int bytes) => AnnaConversionHelper.formatBytes(bytes);
+  String formatBytes(int bytes) => AnnaConversionHelper.formatBytes(bytes);
 
   String formatDuration(int duration) =>
       AnnaConversionHelper.formatTime(duration);
